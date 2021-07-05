@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://s4dbasdev:443/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://s4dbasdev:443/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://s4dbasdev:443/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://s4dbasdev:443/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://s4dbasdev:443/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="cds_zptp_sd_ui_adv_copy_o2" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="I_DraftAdministrativeDataType" sap:label="Draft Administration Data" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false" sap:label="Draft (Technical ID)"/>
+                <Property Name="DraftEntityType" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Draft Entity ID"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Draft Created On"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:text="CreatedByUserDescription" sap:label="Draft Created By"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Draft Last Changed On"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:text="LastChangedByUserDescription" sap:label="Draft Last Changed By"/>
+                <Property Name="DraftAccessType" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Draft Access Type"/>
+                <Property Name="ProcessingStartDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Draft In Process Since"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:text="InProcessByUserDescription" sap:label="Draft In Process By"/>
+                <Property Name="DraftIsKeptByUser" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Draft Is Kept By User"/>
+                <Property Name="EnqueueStartDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Draft Locked Since"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Draft Created By Me"/>
+                <Property Name="DraftIsLastChangedByMe" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Draft Last Changed By Me"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Draft In Process By Me"/>
+                <Property Name="CreatedByUserDescription" Type="Edm.String" MaxLength="80" sap:label="Draft Created By (Description)"/>
+                <Property Name="LastChangedByUserDescription" Type="Edm.String" MaxLength="80" sap:label="Draft Last Changed By (Description)"/>
+                <Property Name="InProcessByUserDescription" Type="Edm.String" MaxLength="80" sap:label="Draft In Process By (Description)"/>
+            </EntityType>
+            <EntityType Name="ZPTP_C_ADV_COPYType" sap:label="Advance copy main view" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PurchasingDocument"/>
+                    <PropertyRef Name="PurchasingDocumentItem"/>
+                    <PropertyRef Name="DraftUUID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="Activation_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Edit_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Preparation_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Validation_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PurchasingDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Purchasing Document" sap:quickinfo="Purchasing Document Number"/>
+                <Property Name="PurchasingDocumentItem" Type="Edm.String" Nullable="false" MaxLength="5" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Item Number of Purchasing Document"/>
+                <Property Name="Supplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:text="SupplierName" sap:label="Vendor" sap:quickinfo="Account Number of Vendor or Creditor"/>
+                <Property Name="SupplierName" Type="Edm.String" MaxLength="80" sap:label="Name of Supplier"/>
+                <Property Name="Material" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
+                <Property Name="PurchasingDocumentItemText" Type="Edm.String" MaxLength="40" sap:label="Short Text"/>
+                <Property Name="OrderQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="OrderQuantityUnit" sap:label="Order Quantity" sap:quickinfo="Purchase Order Quantity"/>
+                <Property Name="OrderQuantityUnit" Type="Edm.String" MaxLength="3" sap:label="Order Unit" sap:quickinfo="Purchase Order Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="StorageLocation" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Storage Location"/>
+                <Property Name="ScheduleLineDeliveryDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Has Draft" sap:heading="" sap:quickinfo="" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false" sap:label="Key" sap:heading="" sap:quickinfo="" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="DraftEntityCreationDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Draft Created On" sap:heading="" sap:quickinfo="" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="DraftEntityLastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Draft Last Changed On" sap:heading="" sap:quickinfo="" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Has active" sap:heading="" sap:quickinfo="" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" sap:display-format="UpperCase" sap:label="Is active" sap:heading="" sap:quickinfo="" sap:creatable="false" sap:updatable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Relationship="cds_zptp_sd_ui_adv_copy_o2.assoc_E74BF0797A78DA30082A4FF9C8E6D89A" FromRole="FromRole_assoc_E74BF0797A78DA30082A4FF9C8E6D89A" ToRole="ToRole_assoc_E74BF0797A78DA30082A4FF9C8E6D89A"/>
+                <NavigationProperty Name="SiblingEntity" Relationship="cds_zptp_sd_ui_adv_copy_o2.assoc_88946C4FBF98A693ED020CE55C72E353" FromRole="FromRole_assoc_88946C4FBF98A693ED020CE55C72E353" ToRole="ToRole_assoc_88946C4FBF98A693ED020CE55C72E353"/>
+                <NavigationProperty Name="to_grat" Relationship="cds_zptp_sd_ui_adv_copy_o2.assoc_8CE5CE01B1175D69C9359142D37CCD4F" FromRole="FromRole_assoc_8CE5CE01B1175D69C9359142D37CCD4F" ToRole="ToRole_assoc_8CE5CE01B1175D69C9359142D37CCD4F"/>
+                <NavigationProperty Name="to_hist" Relationship="cds_zptp_sd_ui_adv_copy_o2.assoc_1210DA2B695DB4E2D5FB8CE0E950BE59" FromRole="FromRole_assoc_1210DA2B695DB4E2D5FB8CE0E950BE59" ToRole="ToRole_assoc_1210DA2B695DB4E2D5FB8CE0E950BE59"/>
+            </EntityType>
+            <EntityType Name="ZPTP_C_ADV_GRATType" sap:label="advance copy gratis view" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PurchaseOrder"/>
+                    <PropertyRef Name="PurchaseOrderItem"/>
+                    <PropertyRef Name="Item"/>
+                    <PropertyRef Name="DraftUUID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="Post_gr_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Preparation_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Validation_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PurchaseOrder" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Purchasing Document" sap:quickinfo="Purchasing Document Number"/>
+                <Property Name="PurchaseOrderItem" Type="Edm.String" Nullable="false" MaxLength="5" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Item Number of Purchasing Document"/>
+                <Property Name="Item" Type="Edm.String" Nullable="false" MaxLength="5" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Item Number of Purchasing Document" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Quantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="Unit"/>
+                <Property Name="Unit" Type="Edm.String" MaxLength="3" sap:label="Order Unit" sap:quickinfo="Purchase Order Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Has Draft" sap:heading="" sap:quickinfo="" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false" sap:label="Key" sap:heading="" sap:quickinfo="" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ParentDraftUUID" Type="Edm.Guid" sap:label="Key" sap:heading="" sap:quickinfo="" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="DraftEntityCreationDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Draft Created On" sap:heading="" sap:quickinfo="" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="DraftEntityLastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Draft Last Changed On" sap:heading="" sap:quickinfo="" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Has active" sap:heading="" sap:quickinfo="" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" sap:display-format="UpperCase" sap:label="Is active" sap:heading="" sap:quickinfo="" sap:creatable="false" sap:updatable="false"/>
+                <NavigationProperty Name="to_head" Relationship="cds_zptp_sd_ui_adv_copy_o2.assoc_8CE5CE01B1175D69C9359142D37CCD4F" FromRole="ToRole_assoc_8CE5CE01B1175D69C9359142D37CCD4F" ToRole="FromRole_assoc_8CE5CE01B1175D69C9359142D37CCD4F"/>
+                <NavigationProperty Name="DraftAdministrativeData" Relationship="cds_zptp_sd_ui_adv_copy_o2.assoc_DA25CFC3E9AD2D215E11B58CEC7AE532" FromRole="FromRole_assoc_DA25CFC3E9AD2D215E11B58CEC7AE532" ToRole="ToRole_assoc_DA25CFC3E9AD2D215E11B58CEC7AE532"/>
+                <NavigationProperty Name="SiblingEntity" Relationship="cds_zptp_sd_ui_adv_copy_o2.assoc_DB8B908797070AEBE7D83888841E4066" FromRole="FromRole_assoc_DB8B908797070AEBE7D83888841E4066" ToRole="ToRole_assoc_DB8B908797070AEBE7D83888841E4066"/>
+            </EntityType>
+            <EntityType Name="zptp_c_adv_histType" sap:label="advance copy history view" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PurchaseOrder"/>
+                    <PropertyRef Name="PurchaseOrderItem"/>
+                    <PropertyRef Name="AccountAssignmentNumber"/>
+                    <PropertyRef Name="PurchaseOrderTransactionType"/>
+                    <PropertyRef Name="MaterialDocumentYear"/>
+                    <PropertyRef Name="MaterialDocument"/>
+                    <PropertyRef Name="MaterialDocumentItem"/>
+                </Key>
+                <Property Name="PurchaseOrder" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Purchase Order" sap:quickinfo="Purchase Order Number"/>
+                <Property Name="PurchaseOrderItem" Type="Edm.String" Nullable="false" MaxLength="5" sap:display-format="NonNegative" sap:label="PO Item" sap:quickinfo="Item Number of Purchase Order"/>
+                <Property Name="AccountAssignmentNumber" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="NonNegative" sap:label="Account Assgmt No." sap:quickinfo="Sequential Number of Account Assignment"/>
+                <Property Name="PurchaseOrderTransactionType" Type="Edm.String" Nullable="false" MaxLength="1" sap:display-format="UpperCase" sap:label="Trans./event type" sap:quickinfo="Transaction/event type, purchase order history"/>
+                <Property Name="MaterialDocumentYear" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Material Doc. Year" sap:quickinfo="Material Document Year"/>
+                <Property Name="MaterialDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Material Document" sap:quickinfo="Number of Material Document"/>
+                <Property Name="MaterialDocumentItem" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Material Doc.Item" sap:quickinfo="Item in Material Document"/>
+                <Property Name="PostingDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Posting Date" sap:quickinfo="Posting Date in the Document"/>
+                <Property Name="Quantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Quantity"/>
+                <NavigationProperty Name="to_advhd" Relationship="cds_zptp_sd_ui_adv_copy_o2.assoc_4B8BAD7EC4D9DCCB0FC78C1A97C4E252" FromRole="FromRole_assoc_4B8BAD7EC4D9DCCB0FC78C1A97C4E252" ToRole="ToRole_assoc_4B8BAD7EC4D9DCCB0FC78C1A97C4E252"/>
+            </EntityType>
+            <ComplexType Name="ValidationFunctionResult">
+                <Property Name="IsValid" Type="Edm.Boolean" sap:label="Is valid"/>
+            </ComplexType>
+            <ComplexType Name="DummyFunctionImportResult">
+                <Property Name="IsInvalid" Type="Edm.Boolean" sap:label="TRUE"/>
+            </ComplexType>
+            <Association Name="assoc_4B8BAD7EC4D9DCCB0FC78C1A97C4E252" sap:content-version="1">
+                <End Type="cds_zptp_sd_ui_adv_copy_o2.zptp_c_adv_histType" Multiplicity="1" Role="FromRole_assoc_4B8BAD7EC4D9DCCB0FC78C1A97C4E252"/>
+                <End Type="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_COPYType" Multiplicity="1" Role="ToRole_assoc_4B8BAD7EC4D9DCCB0FC78C1A97C4E252"/>
+            </Association>
+            <Association Name="assoc_88946C4FBF98A693ED020CE55C72E353" sap:content-version="1">
+                <End Type="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_COPYType" Multiplicity="1" Role="FromRole_assoc_88946C4FBF98A693ED020CE55C72E353"/>
+                <End Type="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_COPYType" Multiplicity="0..1" Role="ToRole_assoc_88946C4FBF98A693ED020CE55C72E353"/>
+            </Association>
+            <Association Name="assoc_8CE5CE01B1175D69C9359142D37CCD4F" sap:content-version="1">
+                <End Type="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_COPYType" Multiplicity="1" Role="FromRole_assoc_8CE5CE01B1175D69C9359142D37CCD4F">
+                    <OnDelete Action="Cascade"/>
+                </End>
+                <End Type="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_GRATType" Multiplicity="*" Role="ToRole_assoc_8CE5CE01B1175D69C9359142D37CCD4F"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_assoc_8CE5CE01B1175D69C9359142D37CCD4F">
+                        <PropertyRef Name="PurchasingDocumentItem"/>
+                        <PropertyRef Name="PurchasingDocument"/>
+                    </Principal>
+                    <Dependent Role="ToRole_assoc_8CE5CE01B1175D69C9359142D37CCD4F">
+                        <PropertyRef Name="PurchaseOrderItem"/>
+                        <PropertyRef Name="PurchaseOrder"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_1210DA2B695DB4E2D5FB8CE0E950BE59" sap:content-version="1">
+                <End Type="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_COPYType" Multiplicity="1" Role="FromRole_assoc_1210DA2B695DB4E2D5FB8CE0E950BE59"/>
+                <End Type="cds_zptp_sd_ui_adv_copy_o2.zptp_c_adv_histType" Multiplicity="*" Role="ToRole_assoc_1210DA2B695DB4E2D5FB8CE0E950BE59"/>
+            </Association>
+            <Association Name="assoc_E74BF0797A78DA30082A4FF9C8E6D89A" sap:content-version="1">
+                <End Type="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_COPYType" Multiplicity="1" Role="FromRole_assoc_E74BF0797A78DA30082A4FF9C8E6D89A"/>
+                <End Type="cds_zptp_sd_ui_adv_copy_o2.I_DraftAdministrativeDataType" Multiplicity="0..1" Role="ToRole_assoc_E74BF0797A78DA30082A4FF9C8E6D89A"/>
+            </Association>
+            <Association Name="assoc_DA25CFC3E9AD2D215E11B58CEC7AE532" sap:content-version="1">
+                <End Type="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_GRATType" Multiplicity="1" Role="FromRole_assoc_DA25CFC3E9AD2D215E11B58CEC7AE532"/>
+                <End Type="cds_zptp_sd_ui_adv_copy_o2.I_DraftAdministrativeDataType" Multiplicity="0..1" Role="ToRole_assoc_DA25CFC3E9AD2D215E11B58CEC7AE532"/>
+            </Association>
+            <Association Name="assoc_DB8B908797070AEBE7D83888841E4066" sap:content-version="1">
+                <End Type="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_GRATType" Multiplicity="1" Role="FromRole_assoc_DB8B908797070AEBE7D83888841E4066"/>
+                <End Type="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_GRATType" Multiplicity="0..1" Role="ToRole_assoc_DB8B908797070AEBE7D83888841E4066"/>
+            </Association>
+            <EntityContainer Name="cds_zptp_sd_ui_adv_copy_o2_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="I_DraftAdministrativeData" EntityType="cds_zptp_sd_ui_adv_copy_o2.I_DraftAdministrativeDataType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ZPTP_C_ADV_COPY" EntityType="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_COPYType" sap:creatable="false" sap:content-version="1"/>
+                <EntitySet Name="ZPTP_C_ADV_GRAT" EntityType="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_GRATType" sap:creatable="false" sap:content-version="1"/>
+                <EntitySet Name="zptp_c_adv_hist" EntityType="cds_zptp_sd_ui_adv_copy_o2.zptp_c_adv_histType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_DB8B908797070AEBE7D83888841E4066" Association="cds_zptp_sd_ui_adv_copy_o2.assoc_DB8B908797070AEBE7D83888841E4066" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZPTP_C_ADV_GRAT" Role="FromRole_assoc_DB8B908797070AEBE7D83888841E4066"/>
+                    <End EntitySet="ZPTP_C_ADV_GRAT" Role="ToRole_assoc_DB8B908797070AEBE7D83888841E4066"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_DA25CFC3E9AD2D215E11B58CEC7AE532" Association="cds_zptp_sd_ui_adv_copy_o2.assoc_DA25CFC3E9AD2D215E11B58CEC7AE532" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZPTP_C_ADV_GRAT" Role="FromRole_assoc_DA25CFC3E9AD2D215E11B58CEC7AE532"/>
+                    <End EntitySet="I_DraftAdministrativeData" Role="ToRole_assoc_DA25CFC3E9AD2D215E11B58CEC7AE532"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_1210DA2B695DB4E2D5FB8CE0E950BE59" Association="cds_zptp_sd_ui_adv_copy_o2.assoc_1210DA2B695DB4E2D5FB8CE0E950BE59" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZPTP_C_ADV_COPY" Role="FromRole_assoc_1210DA2B695DB4E2D5FB8CE0E950BE59"/>
+                    <End EntitySet="zptp_c_adv_hist" Role="ToRole_assoc_1210DA2B695DB4E2D5FB8CE0E950BE59"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_8CE5CE01B1175D69C9359142D37CCD4F" Association="cds_zptp_sd_ui_adv_copy_o2.assoc_8CE5CE01B1175D69C9359142D37CCD4F" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZPTP_C_ADV_COPY" Role="FromRole_assoc_8CE5CE01B1175D69C9359142D37CCD4F"/>
+                    <End EntitySet="ZPTP_C_ADV_GRAT" Role="ToRole_assoc_8CE5CE01B1175D69C9359142D37CCD4F"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_E74BF0797A78DA30082A4FF9C8E6D89A" Association="cds_zptp_sd_ui_adv_copy_o2.assoc_E74BF0797A78DA30082A4FF9C8E6D89A" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZPTP_C_ADV_COPY" Role="FromRole_assoc_E74BF0797A78DA30082A4FF9C8E6D89A"/>
+                    <End EntitySet="I_DraftAdministrativeData" Role="ToRole_assoc_E74BF0797A78DA30082A4FF9C8E6D89A"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_4B8BAD7EC4D9DCCB0FC78C1A97C4E252" Association="cds_zptp_sd_ui_adv_copy_o2.assoc_4B8BAD7EC4D9DCCB0FC78C1A97C4E252" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zptp_c_adv_hist" Role="FromRole_assoc_4B8BAD7EC4D9DCCB0FC78C1A97C4E252"/>
+                    <End EntitySet="ZPTP_C_ADV_COPY" Role="ToRole_assoc_4B8BAD7EC4D9DCCB0FC78C1A97C4E252"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_88946C4FBF98A693ED020CE55C72E353" Association="cds_zptp_sd_ui_adv_copy_o2.assoc_88946C4FBF98A693ED020CE55C72E353" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZPTP_C_ADV_COPY" Role="FromRole_assoc_88946C4FBF98A693ED020CE55C72E353"/>
+                    <End EntitySet="ZPTP_C_ADV_COPY" Role="ToRole_assoc_88946C4FBF98A693ED020CE55C72E353"/>
+                </AssociationSet>
+                <FunctionImport Name="ZPTP_C_ADV_COPYActivation" ReturnType="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_COPYType" EntitySet="ZPTP_C_ADV_COPY" m:HttpMethod="POST" sap:action-for="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_COPYType" sap:applicable-path="Activation_ac">
+                    <Parameter Name="PurchasingDocument" Type="Edm.String" Mode="In" MaxLength="10"/>
+                    <Parameter Name="PurchasingDocumentItem" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="DraftUUID" Type="Edm.Guid" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Mode="In"/>
+                </FunctionImport>
+                <FunctionImport Name="ZPTP_C_ADV_COPYEdit" ReturnType="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_COPYType" EntitySet="ZPTP_C_ADV_COPY" m:HttpMethod="POST" sap:action-for="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_COPYType" sap:applicable-path="Edit_ac">
+                    <Parameter Name="PurchasingDocument" Type="Edm.String" Mode="In" MaxLength="10"/>
+                    <Parameter Name="PurchasingDocumentItem" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="DraftUUID" Type="Edm.Guid" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Mode="In"/>
+                    <Parameter Name="PreserveChanges" Type="Edm.Boolean" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <FunctionImport Name="ZPTP_C_ADV_COPYPreparation" ReturnType="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_COPYType" EntitySet="ZPTP_C_ADV_COPY" m:HttpMethod="POST" sap:action-for="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_COPYType" sap:applicable-path="Preparation_ac">
+                    <Parameter Name="PurchasingDocument" Type="Edm.String" Mode="In" MaxLength="10"/>
+                    <Parameter Name="PurchasingDocumentItem" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="DraftUUID" Type="Edm.Guid" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Mode="In"/>
+                    <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <FunctionImport Name="ZPTP_C_ADV_COPYValidation" ReturnType="cds_zptp_sd_ui_adv_copy_o2.ValidationFunctionResult" m:HttpMethod="GET" sap:action-for="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_COPYType" sap:applicable-path="Validation_ac">
+                    <Parameter Name="PurchasingDocument" Type="Edm.String" Mode="In" MaxLength="10"/>
+                    <Parameter Name="PurchasingDocumentItem" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="DraftUUID" Type="Edm.Guid" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Mode="In"/>
+                    <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <FunctionImport Name="ZPTP_C_ADV_GRATPost_gr" ReturnType="cds_zptp_sd_ui_adv_copy_o2.DummyFunctionImportResult" m:HttpMethod="POST" sap:action-for="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_GRATType" sap:applicable-path="Post_gr_ac">
+                    <Parameter Name="PurchaseOrder" Type="Edm.String" Mode="In" MaxLength="10"/>
+                    <Parameter Name="PurchaseOrderItem" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="Item" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="DraftUUID" Type="Edm.Guid" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Mode="In"/>
+                </FunctionImport>
+                <FunctionImport Name="ZPTP_C_ADV_GRATPreparation" ReturnType="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_GRATType" EntitySet="ZPTP_C_ADV_GRAT" m:HttpMethod="POST" sap:action-for="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_GRATType" sap:applicable-path="Preparation_ac">
+                    <Parameter Name="PurchaseOrder" Type="Edm.String" Mode="In" MaxLength="10"/>
+                    <Parameter Name="PurchaseOrderItem" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="Item" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="DraftUUID" Type="Edm.Guid" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Mode="In"/>
+                    <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <FunctionImport Name="ZPTP_C_ADV_GRATValidation" ReturnType="cds_zptp_sd_ui_adv_copy_o2.ValidationFunctionResult" m:HttpMethod="GET" sap:action-for="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_GRATType" sap:applicable-path="Validation_ac">
+                    <Parameter Name="PurchaseOrder" Type="Edm.String" Mode="In" MaxLength="10"/>
+                    <Parameter Name="PurchaseOrderItem" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="Item" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="DraftUUID" Type="Edm.Guid" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Mode="In"/>
+                    <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+            </EntityContainer>
+            <Annotations Target="cds_zptp_sd_ui_adv_copy_o2.cds_zptp_sd_ui_adv_copy_o2_Entities/ZPTP_C_ADV_COPY" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.DraftRoot">
+                    <Record>
+                        <PropertyValue Property="ActivationAction" String="cds_zptp_sd_ui_adv_copy_o2.cds_zptp_sd_ui_adv_copy_o2_Entities/ZPTP_C_ADV_COPYActivation"/>
+                        <PropertyValue Property="EditAction" String="cds_zptp_sd_ui_adv_copy_o2.cds_zptp_sd_ui_adv_copy_o2_Entities/ZPTP_C_ADV_COPYEdit"/>
+                        <PropertyValue Property="PreparationAction" String="cds_zptp_sd_ui_adv_copy_o2.cds_zptp_sd_ui_adv_copy_o2_Entities/ZPTP_C_ADV_COPYPreparation"/>
+                        <PropertyValue Property="ValidationFunction" String="cds_zptp_sd_ui_adv_copy_o2.cds_zptp_sd_ui_adv_copy_o2_Entities/ZPTP_C_ADV_COPYValidation"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>Activation_ac</PropertyPath>
+                                <PropertyPath>Edit_ac</PropertyPath>
+                                <PropertyPath>Preparation_ac</PropertyPath>
+                                <PropertyPath>Validation_ac</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>Activation_ac</PropertyPath>
+                                <PropertyPath>Edit_ac</PropertyPath>
+                                <PropertyPath>Preparation_ac</PropertyPath>
+                                <PropertyPath>Validation_ac</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zptp_sd_ui_adv_copy_o2.cds_zptp_sd_ui_adv_copy_o2_Entities/ZPTP_C_ADV_GRAT" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.DraftNode">
+                    <Record>
+                        <PropertyValue Property="PreparationAction" String="cds_zptp_sd_ui_adv_copy_o2.cds_zptp_sd_ui_adv_copy_o2_Entities/ZPTP_C_ADV_GRATPreparation"/>
+                        <PropertyValue Property="ValidationFunction" String="cds_zptp_sd_ui_adv_copy_o2.cds_zptp_sd_ui_adv_copy_o2_Entities/ZPTP_C_ADV_GRATValidation"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.DraftActivationVia">
+                    <Collection>
+                        <String>cds_zptp_sd_ui_adv_copy_o2.cds_zptp_sd_ui_adv_copy_o2_Entities/ZPTP_C_ADV_COPY</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>Post_gr_ac</PropertyPath>
+                                <PropertyPath>Preparation_ac</PropertyPath>
+                                <PropertyPath>Validation_ac</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>Post_gr_ac</PropertyPath>
+                                <PropertyPath>Preparation_ac</PropertyPath>
+                                <PropertyPath>Validation_ac</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zptp_sd_ui_adv_copy_o2.cds_zptp_sd_ui_adv_copy_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Aggregation.ApplySupported">
+                    <Record>
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="None"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_COPYType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>PurchasingDocument</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zptp_sd_ui_adv_copy_o2.ZPTP_C_ADV_GRATType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>PurchaseOrderItem</PropertyPath>
+                        <PropertyPath>PurchaseOrder</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="https://s4dbasdev:443/sap/opu/odata/sap/ZPTP_SB_UI_ADV_COPY_O2/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://s4dbasdev:443/sap/opu/odata/sap/ZPTP_SB_UI_ADV_COPY_O2/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
